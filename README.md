@@ -76,7 +76,7 @@ Before generating SBOMs, collect information about the current Ubuntu system in 
    ```
    
 #### **Part 2 – Generate Baseline SBOM and Vulnerability Report**
-1. Use Syft to create a system-level SBOM of APT-managed packages:
+1. Use Syft to create a system-level SBOM of APT-managed packages (**NOTE**: This scan will take approximately 3 minutes to complete):
 
 ```bash
 syft scan dir:/ -o spdx-json > deliverables/system_sbom_before.json

@@ -58,7 +58,7 @@ These actions are essential for:
 ### **Environment Setup**
 All commands can be executed directly inside your GitHub Codespace using this repo.  
 
-#### **Part 1 – Generate Baseline System Information**
+#### **Part 1: Generate Baseline System Information**
 Before generating SBOMs, let's first collect information about the current Ubuntu system in your Codespace:
 
 1. Check the Linux and Ubuntu version:
@@ -80,7 +80,7 @@ Before generating SBOMs, let's first collect information about the current Ubunt
 | **-l** | Program option (*-l*) used to *list* installed packaages 
 | **> deliverables/before_patch.txt** | Re-direct the output to a file named *before_patch.txt* in the `deliverables` folder
 
-#### **Part 2 – Generate Baseline SBOM and Vulnerability Report**
+#### **Part 2: Generate Baseline SBOM and Vulnerability Report**
 1. Use Syft to create a system-level SBOM of APT-managed packages (**NOTE**: This scan will take approximately 3 minutes to complete):
 
 ```bash
@@ -113,7 +113,7 @@ grype sbom:deliverables/system_sbom_before.json -o table > deliverables/system_v
 * Number of vulnerabilities by severity (Critical, High, Medium, Low),
 * In your `reflection.md` file, which you will create in the `deliverables` folder, select one CVE, locate it in the <b><a href="https://nvd.nist.gov/vuln">NVD Database</a></b>, and summarize its cause or impact in a few sentences.
 
-#### **Part 3 – Identify and Apply System Updates**
+#### **Part 3: Identify and Apply System Updates**
 1. Update the package database:
    
    ```bash
@@ -141,13 +141,20 @@ Put together, this command line says, *"With admin privileges, show me all packa
    
 3. If packages are listed, choose at least three (3), record their current and target versions in the `reflection.md` file and continue with the next step (4. Apply system updates).
 
-   **NOTE**: If no packages are listed (only `“Listing… Done”`), record that your system is already fully up-to-date in the `reflection.md` file and jump to Part 4 - Post-Update Analysis.
+   **NOTE**: If no packages are listed (only `“Listing… Done”`), record that your system is already fully up-to-date in the `reflection.md` file and jump to Part 4: Post-Update Analysis.
    
 5. Apply system updates:
 
    ```bash
    sudo apt upgrade -y
    ```
+| **Syntax Breakdown** | **Description**
+|---------------|------------------------|
+| **sudo** | Linux command, short for **superuser do**. Used to temporarily elevate your permissions so you can run the command as the root user
+| **apt** | Short for the Linux **Advanced Package Tool**, the package manager used on Debian-based Linux distributions (Ubuntu, Mint, Kali, etc.) to install, remove, and manage software packages
+| **upgrade** | `apt` sub-command used to install the newer versions of all currently installed packages that have available updates
+| **-y** | Program option used to automatically answer *yes* to all prompts
+   
 6. Verify updates were applied successfully:
 
     ```bash
@@ -155,8 +162,8 @@ Put together, this command line says, *"With admin privileges, show me all packa
     ```
 (If no packages are listed, all updates were applied).
 
-#### **Part 4 – Post-Update Analysis**
-1. Take a second snapshot - save the updated package list as *after_patch.txt* inside your `/deliverables` folder:
+#### **Part 4: Post-Update Analysis**
+1. Take a second snapshot - save the updated package list as *after_patch.txt* inside your `deliverables` folder:
 
    ```bash
    dpkg -l > deliverables/after_patch.txt
@@ -178,11 +185,17 @@ Put together, this command line says, *"With admin privileges, show me all packa
    ```bash
    diff deliverables/before_patch.txt deliverables/after_patch.txt > deliverables/patch_diff.txt
    ```
+| **Syntax Breakdown** | **Description**
+|---------------|------------------------|
+| **diff** | Linux command used to compare files line by line
+| **deliverables/before_patch.txt** | This is the first file passed to *diff*. Think of it as the baseline or original file
+| **deliverables/after_patch.txt** | This is the second file passed to *diff*. This represents the updated or patched file. *diff* compares file #1 against file #2
+| **> deliverables/patch_diff.txt** | Everything *diff* prints to the terminal gets redirected (*>*) into a file named *patch_diff.txt* in the `deliverables` folder
 
 5. Review the resulting file (*patch_diff.txt*) to identify which packages were updated or removed (**NOTE**: *patch_diff.txt* will be empty if no updates were available).
 
 #### **Part 5 – Reflection**
-Answer the following in 2–3 sentences each:
+In your `reflection.md` file, answer the following in 2–3 sentences each:
 
 1. How does maintaining updated packages illustrate *complete mediation*?  
 2. Why is generating a new SBOM after patching essential to assurance?  
@@ -192,7 +205,7 @@ Answer the following in 2–3 sentences each:
 ### **Deliverables**
 **GitHub Submission**:
 
-All files should be saved in your `/deliverables` folder and committed/pushed to your forked GitHub repository:
+All files should be saved in your `deliverables` folder and committed/pushed to your forked GitHub repo:
 
 ```
 deliverables/
@@ -202,7 +215,7 @@ deliverables/
 ├── patch_diff.txt – Comparison of before/after package lists
 ├── system_sbom_before.json and system_sbom_after.json – SBOMs generated by Syft
 ├── system_vulns_before.txt and system_vulns_after.txt – Vulnerability reports from Grype
-└── reflection.md - You create this file; it's your one-page written reflection, answering any of the questions above
+└── reflection.md - You create this file; it's your one-page written reflection, answering any of the questions above, etc.
 ```
 
 **Canvas Submission**:

@@ -9,7 +9,7 @@ There are 2,825 executables reported.
 There are 17,016 locations of file metadata reported.
 There are 17,014 files digest reported
 
-## Grype
+### Grype
 Based on the scan there are 379 vulnerabilies
 Based on the severity levels, there are...
 - 9 critical
@@ -29,7 +29,9 @@ A Linux package called shadow-utils or also known as shadow has a default behavi
 
 ### 3 packages listed from doing the code `sudo apt list --upgradable`
 libpython3.10-minimal/jammy-security 3.10.12-1~22.04.12 amd64 [upgradable from: 3.10.12-1~22.04.11]
+
 libpython3.10-stdlib/jammy-security 3.10.12-1~22.04.12 amd64 [upgradable from: 3.10.12-1~22.04.11]
+
 python3.10-minimal/jammy-security 3.10.12-1~22.04.12 amd64 [upgradable from: 3.10.12-1~22.04.11]
 
 ---
